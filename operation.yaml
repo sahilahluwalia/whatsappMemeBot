@@ -1,0 +1,81 @@
+skip: [mp4, avi, gif]
+file_scheme: "{POSTID}"
+folder_scheme: ''
+limit: 3
+sort: top
+time: day
+min_score: 50
+max_wait_time: 5
+no_dupes: true
+subreddit:
+  - MemeEconomy
+  - ComedyCemetery
+  - dankmemes
+  - PewdiepieSubmissions
+  - hmmm
+  - IndianDankMemes
+  - HistoryMemes
+  - wholesomememes
+  - okbuddyretard
+  - comedyheaven
+  - 4chan
+  - trippinthroughtime
+  - suicidebywords
+  - puns
+  - madlads
+  - indiameme
+  - dankchristianmemes
+  - BikiniBottomTwitter
+  - simpsonsshitposting
+  - greentext
+  - holup
+  - me_irl
+  - Memes_Of_The_Dank
+  - ProgrammerHumor
+  - instantregret
+  - Animememes
+
+  # - ComedyCemetery
+  # - 2meirl42meirl4meirl
+  # - okretardbuddy
+  # - anti_meme
+  # - blessedimages
+  # - anime_irl
+  # - 2meirl4meirl
+  # - 2meirl42meirl4meirl
+  # - BikiniBottomTwitter
+  # - dank_meme
+  # - dankchristianmemes
+  # - dankmemes
+  # - explainitpeter
+  # - meirl
+  # - meme
+  # - memes
+  # - SadMemesForHipTeens
+  # - simpsonsshitposting
+  # - surrealmemes
+  # - TooMeIrlForMeIrl
+  # - wholesomeprequelmemes
+  # - wholesomememes
+  # - 4chan
+  # - AniMemes
+  # - Animememes
+  # - MemeEconomy
+  # - PrequelMemes
+  # - ProgrammerHumor
+  # - Whatcouldgowrong
+  # - funny
+  # - greentext
+  # - instantregret
+  # - madlads
+  # - pewdiepiesubmissions
+  # - terriblefacebookmemes
+  # - kidsAreFuckingStupid 
+  # - trippinthroughtime
+  # - MemeEconomy
+  # - trippinthroughtime
+  # - Memes_Of_The_Dank
+  # - me_irl
+  # - holup
+  # - indiandankmeme
+  # - dankrishu
