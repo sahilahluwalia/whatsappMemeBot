@@ -1,7 +1,7 @@
 skip: [mp4, avi, gif]
 file_scheme: "{POSTID}"
 folder_scheme: ''
-limit: 3
+limit: 4
 sort: top
 time: day
 min_score: 50
