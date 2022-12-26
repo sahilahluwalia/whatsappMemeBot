@@ -32,9 +32,13 @@ const FileDeleter = async (path) => {
 
 const { Client, LocalAuth} = require('whatsapp-web.js');
 const client = new Client({
-    authStrategy: new LocalAuth(),
+    authStrategy: new LocalAuth(
+        {
+            dataPath:'./token'
+        }
+    ),
     puppeteer: {
-       headless: false,
+        headless: false,
         executablePath: '/usr/bin/google-chrome-stable',
     }
 });
@@ -43,11 +47,11 @@ client.on('qr', qr => {
     qrcode.generate(qr, {small: true});
 });
 const groups=[
-    {
-      id: '917002360198-1552207876@g.us',
-      name: 'M E M E S T R U A T I O N'
-    },
-    //  { id: '120363046778314843@g.us', name: 'Test' } 
+    // {
+    //   id: '917002360198-1552207876@g.us',
+    //   name: 'M E M E S T R U A T I O N'
+    // },
+     { id: '120363046778314843@g.us', name: 'Test' } 
     // { id: '919997607064-1562001752@g.us', name: 'DANK AF MEMES' },
   ]
 
@@ -63,22 +67,22 @@ client.on('ready', async() => {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         } 
-        files.forEach(function  (file) {
-            for (let group of groups) {
-                console.log('spam started')
-                const media = MessageMedia.fromFilePath(`./posts/${file}`);
-                client.sendMessage(group['id'], media).then
-                (()=>{
-                    console.log('message sent')
-                    setTimeout (() => {
-                        console.log('fil deleting started')
-                        FileDeleter(`./posts/${file}`)
-                        console.log('file deleted')
-                    },500000)
-                }
-                ).catch((err)=>{console.log(err)})
+        // files.forEach(function  (file) {
+        //     for (let group of groups) {
+        //         console.log('spam started')
+        //         const media = MessageMedia.fromFilePath(`./posts/${file}`);
+        //         client.sendMessage(group['id'], media).then
+        //         (()=>{
+        //             console.log('message sent')
+        //             setTimeout (() => {
+        //                 console.log('fil deleting started')
+        //                 FileDeleter(`./posts/${file}`)
+        //                 console.log('file deleted')
+        //             },300000)
+        //         }
+        //         ).catch((err)=>{console.log(err)})
     
-            }})
+        //     }})
     });});
     
    
