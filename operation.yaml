@@ -1,39 +1,51 @@
-skip: [mp4, avi, gif]
+skip: []
 file_scheme: "{POSTID}"
 folder_scheme: ''
 limit: 4
 sort: top
 time: day
-min_score: 50
-max_wait_time: 5
+min_score: 500
+max_wait_time: 30
 no_dupes: true
 subreddit:
   - MemeEconomy
-  - ComedyCemetery
+  - shitposting
+  - ComedyNecrophilia
+  - comedyheaven
+  - depression_memes
+  - linuxmemes
+  - MEOW_IRL
+  - cursedcomments
+  - anime_irl
+  - Animemes
+  - ProgrammerHumor
   - dankmemes
   - PewdiepieSubmissions
-  - hmmm
   - IndianDankMemes
-  - HistoryMemes
   - wholesomememes
-  - okbuddyretard
-  - comedyheaven
   - 4chan
   - trippinthroughtime
-  - suicidebywords
-  - puns
   - madlads
-  - indiameme
-  - dankchristianmemes
   - BikiniBottomTwitter
-  - simpsonsshitposting
   - greentext
-  - holup
-  - me_irl
-  - Memes_Of_The_Dank
-  - ProgrammerHumor
-  - instantregret
-  - Animememes
+
+  # - ComedyCemetery
+
+  # - hmmm
+  # - HistoryMemes
+  # - okbuddyretard
+  # - comedyheaven
+
+  # - suicidebywords
+  # - puns
+  # - indiameme
+  # - dankchristianmemes
+  # - simpsonsshitposting
+  # - holup
+  # - me_irl
+  # - Memes_Of_The_Dank
+  # - instantregret
+  # - Animememes
 
   # - ComedyCemetery
   # - 2meirl42meirl4meirl

@@ -1,97 +1,79 @@
-const qrcode = require('qrcode-terminal');
-MessageMedia = require('whatsapp-web.js').MessageMedia;
-const path = require('path');
-const fs = require('fs');
-const { unlink } = require('fs/promises');
-var myfile
-const directoryPath = path.join(__dirname, 'posts');
-fs.readdir(directoryPath, function  (err, files) {
-    //handling error
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    } 
-    //listing all files using forEach
-    files.forEach(function  (file,number) {
-        // console.log(file)
-        // console.log(number)
-        // if(number%80==0){
-        //     console.log(number)
-        // }
-    });
-});
+const qrcode = require("qrcode-terminal");
+MessageMedia = require("whatsapp-web.js").MessageMedia;
+
+const fs = require("fs");
+const { unlink } = require("fs/promises");
+const path = require("path");
+const directoryPath = path.join(__dirname, "posts");
 
 const FileDeleter = async (path) => {
-        try {
-          await unlink(path);
-          console.log(`successfully deleted ${path}`);
-        } catch (error) {
-          console.error('there was an error:', error.message);
-      }
-}
+  try {
+    await unlink(path);
+    console.log(`successfully deleted ${path}`);
+  } catch (error) {
+    console.error("there was an error:", error.message);
+  }
+};
 
-
-const { Client, LocalAuth} = require('whatsapp-web.js');
+const { Client, LocalAuth } = require("whatsapp-web.js");
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: {
-       headless: false,
-        executablePath: '/usr/bin/google-chrome-stable',
-    }
+  authStrategy: new LocalAuth(),
+  puppeteer: {
+    headless: true,
+    executablePath: "/usr/bin/google-chrome-stable",
+  },
 });
 
-client.on('qr', qr => {
-    qrcode.generate(qr, {small: true});
+client.on("qr", (qr) => {
+  qrcode.generate(qr, { small: true });
 });
-const groups=[
-    {
-      id: '917002360198-1552207876@g.us',
-      name: 'M E M E S T R U A T I O N'
-    },
-    //  { id: '120363046778314843@g.us', name: 'Test' } 
-    // { id: '919997607064-1562001752@g.us', name: 'DANK AF MEMES' },
-  ]
+// active groups to send the message
+const groups = [
+  {
+    id: "917002360198-1552207876@g.us",
+    name: "M E M E S T R U A T I O N",
+  },
+];
 
-
-  
-client.on('ready', async() => {
-    console.log('Client is ready!');
-    for (let group of groups) {
-        client.sendMessage(group['id'], "MEME")
+client.on("ready", async () => {
+  console.log("Client is ready!");
+  for (let group of groups) {
+    client.sendMessage(group["id"], "MEME");
+  }
+  fs.readdir(directoryPath, function (err, files) {
+    //handling error
+    if (err) {
+      return console.log("Unable to scan directory: " + err);
     }
-    fs.readdir(directoryPath, function  (err, files) {
-        //handling error
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        } 
-        files.forEach(function  (file) {
-            for (let group of groups) {
-                console.log('spam started')
-                const media = MessageMedia.fromFilePath(`./posts/${file}`);
-                client.sendMessage(group['id'], media).then
-                (()=>{
-                    console.log('message sent')
-                    setTimeout (() => {
-                        console.log('fil deleting started')
-                        FileDeleter(`./posts/${file}`)
-                        console.log('file deleted')
-                    },500000)
-                }
-                ).catch((err)=>{console.log(err)})
-    
-            }})
-    });});
-    
-   
-
-
-
-
-
+    let count = 0;
+    files.forEach(function (file) {
+      for (let group of groups) {
+        console.log("spam started");
+        const media = MessageMedia.fromFilePath(`./posts/${file}`);
+        count++;
+        if (count % 60 == 0) {
+          // useful for sending text message so media will be grouped together
+          client.sendMessage(group["id"], "MEME");
+        }
+        client
+          .sendMessage(group["id"], media)
+          .then(() => {
+            console.log("message sent");
+            setTimeout(() => {
+              console.log("file deleting started");
+              FileDeleter(`./posts/${file}`);
+              console.log("file deleted");
+            }, 500000);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  });
+});
 
 client.initialize();
-
-
-
 
 // const name=[
 //     {
@@ -105,6 +87,21 @@ client.initialize();
 //     console.log(x['id'])
 //     console.log(x['name'])
 // }
+// code for reading files
+// fs.readdir(directoryPath, function (err, files) {
+//   //handling error
+//   if (err) {
+//     return console.log("Unable to scan directory: " + err);
+//   }
+//   //listing all files using forEach
+//   files.forEach(function (file, number) {
+//     // console.log(file)
+//     // console.log(number)
+//     // if(number%80==0){
+//     //     console.log(number)
+//     // }
+//   });
+// });
 
 // const groupName = 'M E M E S T R U A T I O N'
 // const chats = await client.getChats()
@@ -117,12 +114,11 @@ client.initialize();
 //         }
 //     })
 //     console.log(groups)
- 
-   
-  // client.sendMessage(group['id'], "It's meeeeeeeeeeeeme time")
+
+// client.sendMessage(group['id'], "It's meeeeeeeeeeeeme time")
 //     //listing all files using forEach
-//     
-       
+//
+
 //     });
 //     for (let group of groups) {
 //         // console.log('spam started')
@@ -130,25 +126,21 @@ client.initialize();
 //        console.log('completed')
 //     }
 // });
-  
-   
 
-
-    // client.sendMessage(groups[0].id, 'Hello from WhatsApp!');
-    // client.searchMessages('Hello from WhatsApp! multple', groups[0].id, 1, 1).then((messages) => {
-    //     console.log(messages)
-    // })
-    // // send myfile to whatsapp media file
-    // const media = MessageMedia.fromFilePath(`./posts/${myfile}`);
-    // client.sendMessage(groups[0].id, media, { caption: 'My Caption' });
+// client.sendMessage(groups[0].id, 'Hello from WhatsApp!');
+// client.searchMessages('Hello from WhatsApp! multple', groups[0].id, 1, 1).then((messages) => {
+//     console.log(messages)
+// })
+// // send myfile to whatsapp media file
+// const media = MessageMedia.fromFilePath(`./posts/${myfile}`);
+// client.sendMessage(groups[0].id, media, { caption: 'My Caption' });
 //     // client.sendMessage(groups[0].id, media);
-
 
 // fs.readdir(directoryPath, function  (err, files) {
 //     //handling error
 //     if (err) {
 //         return console.log('Unable to scan directory: ' + err);
-//     } 
+//     }
 
 // - 3amjokes
 //   - ComedyCemetery
@@ -201,7 +193,7 @@ client.initialize();
 //   - madlads
 //   - pewdiepiesubmissions
 //   - terriblefacebookmemes
-//   - kidsAreFuckingStupid 
+//   - kidsAreFuckingStupid
 //   - trippinthroughtime
 //   - MemeEconomy
 //   - trippinthroughtime
@@ -210,9 +202,6 @@ client.initialize();
 //   - holup
 //   - indiandankmeme
 //   - dankrishu
-
-
-
 
 // subreddit:
 //   - ComedyCemetery
@@ -250,7 +239,7 @@ client.initialize();
 //   - madlads
 //   - pewdiepiesubmissions
 //   - terriblefacebookmemes
-//   - kidsAreFuckingStupid 
+//   - kidsAreFuckingStupid
 //   - trippinthroughtime
 //   - MemeEconomy
 //   - trippinthroughtime
